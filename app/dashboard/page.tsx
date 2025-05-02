@@ -17,8 +17,8 @@ export default async function DashboardPage() {
     switch (user?.provider) {
       case 'google':
         return 'Google';
-      case 'custom-oauth':
-        return 'Custom OAuth';
+      case 'saturnrcc':
+        return 'SaturnRCC';
       case 'credentials':
         return 'Email & Password';
       default:

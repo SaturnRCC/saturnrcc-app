@@ -12,11 +12,29 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
+    {
+      id: "saturnrcc",
+      name: "SaturnRCC",
+      type: "oauth",
+      clientId: process.env.CUSTOM_OAUTH_CLIENT_ID!,
+      clientSecret: process.env.CUSTOM_OAUTH_CLIENT_SECRET!,
+      authorization: process.env.CUSTOM_OAUTH_AUTHORIZATION_URL!,
+      token: process.env.CUSTOM_OAUTH_TOKEN_URL!,
+      userinfo: process.env.CUSTOM_OAUTH_USERINFO_URL!,
+      profile(profile: { id: string; name: string; email: string }) {
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: null,
+        };
+      },
+    },
     CredentialsProvider({
       name: "credentials",
       credentials: {
         email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" }
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -25,8 +43,8 @@ export const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
-          }
+            email: credentials.email,
+          },
         });
 
         if (!user) {
@@ -37,22 +55,25 @@ export const authOptions: NextAuthOptions = {
         if (!user.password) {
           return null;
         }
-        const passwordsMatch = await bcrypt.compare(credentials.password, user.password);
+        const passwordsMatch = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
         if (!passwordsMatch) {
           return null;
         }
 
         return user;
-      }
-    })
+      },
+    }),
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
   pages: {
-    signIn: "/login"
-  }
+    signIn: "/login",
+  },
 };

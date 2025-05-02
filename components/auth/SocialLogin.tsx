@@ -32,9 +32,9 @@ export function SocialLogin() {
   const handleCustomOAuthLogin = async () => {
     setIsCustomLoading(true);
     try {
-      await signIn('custom-oauth', { callbackUrl: '/dashboard' });
+      await signIn('saturnrcc', { callbackUrl: '/dashboard' }); // Changed provider ID to 'saturnrcc'
     } catch (error) {
-      console.error('Custom OAuth login error:', error);
+      console.error('SaturnRCC login error:', error); // Updated error message
       toast({
         title: 'Error',
         description: 'Failed to sign in with Custom OAuth',
@@ -104,7 +104,7 @@ export function SocialLogin() {
               />
             </svg>
           )}
-          Sign in with Custom OAuth
+          Sign in with SaturnRCC {/* Updated button text */}
         </Button>
       </div>
     </Card>
