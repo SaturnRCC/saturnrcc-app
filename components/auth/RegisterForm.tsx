@@ -59,7 +59,7 @@ export function RegisterForm() {
 
       toast({
         title: 'Success',
-        description: 'Account created successfully. Please sign in.',
+        description: 'Account created successfully!',
       });
 
       // Auto sign in after registration

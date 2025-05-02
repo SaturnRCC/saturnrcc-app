@@ -46,10 +46,10 @@ export default async function DashboardPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* <div>
+            <div>
               <h3 className="text-sm font-medium text-muted-foreground">Name</h3>
               <p className="text-lg">{user?.name || 'Not provided'}</p>
-            </div> */}
+            </div>
             <div>
               <h3 className="text-sm font-medium text-muted-foreground">Email</h3>
               <p className="text-lg">{user?.email}</p>

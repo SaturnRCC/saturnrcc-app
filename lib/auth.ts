@@ -31,6 +31,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
     CredentialsProvider({
+      id: "credentials",
       name: "credentials",
       credentials: {
         email: { label: "email", type: "text" },
